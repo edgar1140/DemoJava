@@ -1,6 +1,7 @@
 package com.example.demo.model.internal;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author eguzman (2018.07.09 11:21 AM)
@@ -14,6 +15,7 @@ public class Customer {
     private Date createDate;
     private Long expireUserId;
     private Date expirationDate;
+    private List<Account> accountList;
 
     public Long getId() {
         return id;
@@ -86,6 +88,13 @@ public class Customer {
         this.expirationDate = expirationDate;
         return this;
     }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public Customer setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
+        return this;
+    }
 }
-
-

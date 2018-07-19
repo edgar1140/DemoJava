@@ -1,5 +1,10 @@
 package com.example.demo.model.internal.response;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+import com.example.demo.model.internal.Account;
+
 /**
  * @author eguzman (2018.07.09 2:38 PM)
  */
@@ -8,8 +13,7 @@ public class GetCustomerResponse {
         private String firstName;
         private String lastName;
         private Long id;
-        private Long locationId;
-        private String jobTitle;
+        private List<Account> accounts;
 
         public String getFirstName() {
             return firstName;
@@ -38,24 +42,58 @@ public class GetCustomerResponse {
             return this;
         }
 
-        public Long getLocationId() {
-            return locationId;
+        public List<Account> getAccounts() {
+            return accounts;
         }
 
-        public Customer setLocationId(Long locationId) {
-            this.locationId = locationId;
-            return this;
-        }
-
-        public String getJobTitle() {
-            return jobTitle;
-        }
-
-        public Customer setJobTitle(String jobTitle) {
-            this.jobTitle = jobTitle;
+        public Customer setAccounts(List<Account> accounts) {
+            this.accounts = accounts;
             return this;
         }
     }
+    public static class Account {
+        private String firstName;
+        private String lastName;
+        private Long id;
+        private BigDecimal balance;
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public Account setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public Account setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public Account setId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public BigDecimal getBalance() {
+            return balance;
+        }
+
+        public Account setBalance(BigDecimal balance) {
+            this.balance = balance;
+            return this;
+        }
+    }
+
     private Customer customer;
 
     public Customer getCustomer() {

@@ -1,4 +1,4 @@
-CREATE SEQUENCE user_id_seq;
+CREATE SEQUENCE user_id_seq START WITH 2;
 
 CREATE TABLE user (
   user_id        INTEGER(50) NOT NULL PRIMARY KEY,
@@ -13,7 +13,7 @@ CREATE TABLE user (
   expire_date    TIMESTAMP
 );
 
-CREATE SEQUENCE customer_id_seq;
+CREATE SEQUENCE customer_id_seq START WITH 2;
 
 CREATE TABLE customer (
   customer_id    INTEGER(50) NOT NULL PRIMARY KEY,
@@ -26,7 +26,7 @@ CREATE TABLE customer (
   expire_date    TIMESTAMP
 );
 
-CREATE SEQUENCE account_id_seq;
+CREATE SEQUENCE account_id_seq START WITH 3;
 
 CREATE TABLE account (
   account_id     INTEGER(50) NOT NULL PRIMARY KEY,

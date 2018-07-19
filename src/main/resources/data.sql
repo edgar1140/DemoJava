@@ -8,10 +8,7 @@ INSERT INTO user (
   create_user_id
 )
 VALUES (
-  (
-    SELECT user_id_seq.nextval
-    FROM dual),
-
+  1,
   'USER_01_FIRST',
   'USER_01_MIDDLE',
   'USER_01_LAST',
@@ -27,11 +24,45 @@ INSERT INTO customer (
   create_user_id
 )
 VALUES (
-  (
-    SELECT customer_id_seq.nextval
-    FROM dual),
-
-  'USER_01_FIRST',
-  'USER_01_LAST',
-  'PLACE HOLDER'
+  1,
+  'Manuel',
+  'Gutierrez',
+  1
 );
+
+INSERT INTO account (
+  account_id,
+  customer_id,
+  first_name,
+  last_name,
+  create_user_id
+
+
+)
+VALUES (
+  1,
+  1,
+  'Danny',
+  'Trejo',
+  1
+
+);
+
+INSERT INTO account (
+  account_id,
+  customer_id,
+  first_name,
+  last_name,
+  create_user_id
+
+
+)
+VALUES (
+  2,
+  1,
+  'George',
+  'Lopez',
+  1
+
+);
+

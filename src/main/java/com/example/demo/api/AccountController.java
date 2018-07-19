@@ -29,7 +29,7 @@ public class AccountController {
         return accountAgent.createAccount(request);
     }
     @RequestMapping (value = "/get-by-id", method = RequestMethod.POST)
-    public GetAccountResponse getAccountId (@RequestBody GetAccountRequest resquest) {
-        return accountAgent.getAccount(resquest);
+    public GetAccountResponse getAccountId (@RequestBody GetAccountRequest request) {
+        return accountAgent.getAccount(request);
     }
 }

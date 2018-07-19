@@ -8,6 +8,14 @@ import com.example.demo.model.internal.Customer;
 public class CreateCustomerRequest {
     private String firstName;
     private String lastName;
+    private Long userId;
+
+
+
+    public CreateCustomerRequest setUserId(Long userId) {
+        this.userId = userId;
+        return this;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -26,4 +34,7 @@ public class CreateCustomerRequest {
         this.lastName = lastName;
         return this;
     }
+    public Long getUserId() {
+         return userId;
+     }
 }

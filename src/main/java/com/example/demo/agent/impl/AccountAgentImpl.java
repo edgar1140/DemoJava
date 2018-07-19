@@ -57,9 +57,9 @@ public class AccountAgentImpl implements AccountAgent {
     }
 
     @Override
-    public GetAccountResponse getAccount(GetAccountRequest resquest) {
+    public GetAccountResponse getAccount(GetAccountRequest request) {
         final GetAccountResponse response = new GetAccountResponse();
-        final Long id = resquest.getAccountId();
+        final Long id = request.getAccountId();
         final GetAccountResponse.Account responseAccount;
 
         if (id != null) {
