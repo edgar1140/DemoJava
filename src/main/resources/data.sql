@@ -66,3 +66,21 @@ VALUES (
 
 );
 
+INSERT INTO account (
+  account_id,
+  customer_id,
+  first_name,
+  last_name,
+  create_user_id
+
+
+)
+VALUES (
+  3,
+  1,
+  'Kevin',
+  'Hart',
+  1
+
+);
+

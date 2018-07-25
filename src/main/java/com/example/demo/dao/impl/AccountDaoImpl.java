@@ -34,7 +34,7 @@ public class AccountDaoImpl implements AccountDao {
             "   last_name, " +
             "   create_user_id " +
             " ) VALUES ( " +
-            "   :accounId, " +
+            "   :accountId, " +
             "   :customerId, " +
             "   :firstName, " +
             "   :middleName, " +
@@ -43,7 +43,7 @@ public class AccountDaoImpl implements AccountDao {
             " )";
 
         final MapSqlParameterSource parameterSource = new MapSqlParameterSource()
-            .addValue("accounId", accountId)
+            .addValue("accountId", accountId)
             .addValue("customerId", customerId)
             .addValue("firstName", firstName)
             .addValue("middleName", middleName)

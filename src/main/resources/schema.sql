@@ -1,4 +1,5 @@
-CREATE SEQUENCE user_id_seq START WITH 2;
+CREATE SEQUENCE user_id_seq
+  START WITH 2;
 
 CREATE TABLE user (
   user_id        INTEGER(50) NOT NULL PRIMARY KEY,
@@ -13,7 +14,8 @@ CREATE TABLE user (
   expire_date    TIMESTAMP
 );
 
-CREATE SEQUENCE customer_id_seq START WITH 2;
+CREATE SEQUENCE customer_id_seq
+  START WITH 2;
 
 CREATE TABLE customer (
   customer_id    INTEGER(50) NOT NULL PRIMARY KEY,
@@ -26,7 +28,8 @@ CREATE TABLE customer (
   expire_date    TIMESTAMP
 );
 
-CREATE SEQUENCE account_id_seq START WITH 3;
+CREATE SEQUENCE account_id_seq
+  START WITH 4;
 
 CREATE TABLE account (
   account_id     INTEGER(50) NOT NULL PRIMARY KEY,
@@ -40,3 +43,23 @@ CREATE TABLE account (
   expire_user_id INTEGER(50),
   expire_date    TIMESTAMP
 );
+
+CREATE SEQUENCE subscription_id_seq
+  START WITH 1;
+
+CREATE TABLE subscription (
+  subscription_id INTEGER(50) NOT NULL PRIMARY KEY,
+  account_id      INTEGER(50) NOT NULL,
+  phone_number    INTEGER(20),
+  serial_number   VARCHAR(20),
+  plan_name        VARCHAR(20),
+  first_name      VARCHAR(50) NOT NULL,
+  middle_name     VARCHAR(50),
+  last_name       VARCHAR(50) NOT NULL,
+  active         BOOLEAN,
+  create_user_id  INTEGER(50) NOT NULL,
+  create_date     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  expire_user_id  INTEGER(50),
+  expire_date     TIMESTAMP
+);
+
