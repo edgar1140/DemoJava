@@ -97,4 +97,5 @@ public class Customer {
         this.accountList = accountList;
         return this;
     }
+
 }

@@ -1,5 +1,8 @@
 package com.example.demo.agent.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -7,13 +10,11 @@ import org.springframework.stereotype.Service;
 import com.example.demo.agent.AccountAgent;
 import com.example.demo.dao.AccountDao;
 import com.example.demo.model.internal.Account;
-import com.example.demo.model.internal.Customer;
+import com.example.demo.model.internal.Subscription;
 import com.example.demo.model.internal.request.CreateAccountRequest;
 import com.example.demo.model.internal.request.GetAccountRequest;
 import com.example.demo.model.internal.response.CreateAccountResponse;
-import com.example.demo.model.internal.response.CreateCustomerResponse;
 import com.example.demo.model.internal.response.GetAccountResponse;
-import com.example.demo.model.internal.response.GetCustomerResponse;
 import com.example.demo.utility.StringUtils;
 
 /**
@@ -66,10 +67,13 @@ public class AccountAgentImpl implements AccountAgent {
             final Account account = accountDao.getAccountById(id);
 
             if (account != null) {
+                final List<Subscription> subscriptionFromDataBaseList = account.getSubscriptionList();
+                final List<GetAccountResponse.Subscription> subscriptionList = toSubscriptionList(subscriptionFromDataBaseList);
                 responseAccount = new GetAccountResponse.Account()
-                    .setAccount_name(account.getFirstName())
-                    .setAccount_id(account.getId())
-                    .setAccount_Amount(account.getBalance());
+                    .setAccountName(account.getFirstName())
+                    .setAccountId(account.getId())
+                    .setAccountAmount(account.getBalance())
+                    .setSubscriptions(subscriptionList);
             } else {
                 responseAccount = null;
             }
@@ -78,5 +82,27 @@ public class AccountAgentImpl implements AccountAgent {
         }
         response.setAccount(responseAccount);
         return response;
+    }
+
+    private List<GetAccountResponse.Subscription> toSubscriptionList(List<Subscription> subscriptions) {
+        List<GetAccountResponse.Subscription> subscriptionList;
+        if (subscriptions != null && !subscriptions.isEmpty()) {
+            subscriptionList = new ArrayList<>();
+            for (Subscription subscriptionFromDataBase : subscriptions) {
+                final GetAccountResponse.Subscription subscription = new GetAccountResponse.Subscription()
+                    .setFirstName(subscriptionFromDataBase.getFirstName())
+                    .setLastName(subscriptionFromDataBase.getLastName())
+                    .setId(subscriptionFromDataBase.getId())
+                    .setSerialNumber(subscriptionFromDataBase.getSerialNumber())
+                    .setPlanName(subscriptionFromDataBase.getPlanName())
+                    .setPhoneNumber(subscriptionFromDataBase.getPhoneNumber());
+                subscriptionList.add(subscription);
+
+            }
+
+        } else {
+            subscriptionList = null;
+        }
+        return subscriptionList;
     }
 }

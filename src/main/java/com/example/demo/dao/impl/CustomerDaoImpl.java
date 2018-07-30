@@ -17,8 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.dao.CustomerDao;
 import com.example.demo.model.internal.Account;
 import com.example.demo.model.internal.Customer;
-
-import jdk.nashorn.internal.ir.WhileNode;
+import com.example.demo.model.internal.Subscription;
 
 /**
  * @author eguzman (2018.07.10 10:29 AM)
@@ -83,17 +82,27 @@ public class CustomerDaoImpl implements CustomerDao {
             " acct.create_user_id AS acct_create_user_id, " +
             " acct.create_date AS acct_create_date, " +
             " acct.expire_user_id AS acct_expire_user_id, " +
-            " acct.expire_date AS acct_expire_date " +
+            " acct.expire_date AS acct_expire_date, " +
+            " subs.subscription_id, " +
+            " subs.first_name AS subs_first_name, " +
+            " subs.middle_name AS subs_middle_name, " +
+            " subs.last_name AS subs_last_name, " +
+            " subs.create_user_id AS subs_create_user_id, " +
+            " subs.create_date AS subs_create_date, " +
+            " subs.expire_user_id AS subs_expire_user_id," +
+            " subs.expire_date AS subs_expire_date " +
             "FROM customer cust " +
             "LEFT OUTER JOIN account acct ON cust.customer_id = acct.customer_id " +
-            "WHERE cust.customer_id = :customerId";
+            "LEFT OUTER JOIN subscription subs ON acct.account_id = subs.account_id " +
+            " WHERE cust.customer_id = :customerId" +
+            " ORDER BY cust.customer_id, acct.account_id , subs.subscription_id";
         final MapSqlParameterSource parameterSource = new MapSqlParameterSource()
             .addValue("customerId", id);
         return namedParameterJdbcTemplate.query(sql, parameterSource, new ResultSetExtractor<Customer>() {
             @Override
             public Customer extractData(ResultSet rs) throws SQLException, DataAccessException {
                 Customer customer = null;
-                final List<Account> accountList = new ArrayList<>();
+                Account account = null;
                 while (rs.next()) {
                     if (customer == null) {
                         customer = new Customer()
@@ -108,8 +117,9 @@ public class CustomerDaoImpl implements CustomerDao {
 
                     }
                     final long accountId = rs.getLong("account_id");
-                    if (accountId > 0) {
-                        final Account account = new Account()
+                    final boolean addAccount = accountId > 0 && (account == null || account.getId() == null || account.getId() != accountId);
+                    if (addAccount) {
+                        account = new Account()
                             .setId(accountId)
                             .setFirstName(rs.getString("acct_first_name"))
                             .setMiddleName(rs.getString("acct_middle_name"))
@@ -119,18 +129,33 @@ public class CustomerDaoImpl implements CustomerDao {
                             .setCreateDate(rs.getTimestamp("acct_create_date"))
                             .setExpireUserId(rs.getLong("acct_expire_user_id"))
                             .setExpirationDate(rs.getTimestamp("acct_expire_date"));
+                        final List<Account> accountList = customer.getAccountList() != null ? customer.getAccountList() :new ArrayList<>();
+                        customer.setAccountList(accountList);
                         accountList.add(account);
 
                     }
+                    final long subscriptionId = rs.getLong("subscription_id");
+                    final boolean addSubscription = account != null && subscriptionId > 0;
+                    if (addSubscription) {
+                        final Subscription subscription = new Subscription()
+                            .setId(rs.getLong("subscription_id"))
+                            .setFirstName(rs.getString("subs_first_name"))
+                            .setLastName(rs.getString("subs_last_name"))
+                            .setCreateUserId(rs.getLong("subs_create_user_id"))
+                            .setCreateDate(rs.getTimestamp("subs_create_date"))
+                            .setExpireUserId(rs.getLong("subs_expire_user_id"))
+                            .setExpirationDate(rs.getTimestamp("subs_expire_date"));
+                        final List<Subscription> subscriptionList = account.getSubscriptionList() != null ? account.getSubscriptionList() :new ArrayList<>();
+                        account.setSubscriptionList(subscriptionList);
+                        subscriptionList.add(subscription);
 
-                }
-                if (customer != null) {
-                    customer.setAccountList(accountList);
+                    }
 
                 }
                 return customer;
 
             }
+
         });
     }
 }

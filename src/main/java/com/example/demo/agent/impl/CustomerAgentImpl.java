@@ -11,6 +11,7 @@ import com.example.demo.agent.CustomerAgent;
 import com.example.demo.dao.CustomerDao;
 import com.example.demo.model.internal.Account;
 import com.example.demo.model.internal.Customer;
+import com.example.demo.model.internal.Subscription;
 import com.example.demo.model.internal.request.CreateCustomerRequest;
 import com.example.demo.model.internal.request.GetCustomerRequest;
 import com.example.demo.model.internal.response.CreateCustomerResponse;
@@ -68,11 +69,27 @@ public class CustomerAgentImpl implements CustomerAgent {
                 final boolean extractAccounts = accountFromDataBaseList != null && !accountFromDataBaseList.isEmpty();
                 if (extractAccounts) {
                     for (Account accountFromDataBase : accountFromDataBaseList) {
+                        final List<Subscription> subscriptionFromDataBaseList = accountFromDataBase.getSubscriptionList();
+                        final boolean extractSubscriptions = subscriptionFromDataBaseList != null && !subscriptionFromDataBaseList.isEmpty();
+                        List<GetCustomerResponse.Subscription> subscriptionList = null;
+                        if (extractSubscriptions) {
+                            subscriptionList = new ArrayList<>();
+                            for (Subscription subscriptionFromDataBase : subscriptionFromDataBaseList) {
+                                final GetCustomerResponse.Subscription subscription = new GetCustomerResponse.Subscription()
+                                    .setSubscriptionId(subscriptionFromDataBase.getId())
+                                    .setFirstName(subscriptionFromDataBase.getFirstName())
+                                    .setLastName(subscriptionFromDataBase.getLastName())
+                                    .setPhoneNumber(subscriptionFromDataBase.getPhoneNumber())
+                                    .setSerialNumber(subscriptionFromDataBase.getSerialNumber());
+                                subscriptionList.add(subscription);
+                            }
+                        }
                         final GetCustomerResponse.Account account = new GetCustomerResponse.Account()
                             .setFirstName(accountFromDataBase.getFirstName())
                             .setLastName(accountFromDataBase.getLastName())
                             .setId(accountFromDataBase.getId())
-                            .setBalance(accountFromDataBase.getBalance());
+                            .setBalance(accountFromDataBase.getBalance())
+                            .setSubscriptionList(subscriptionList);
                         accountList.add(account);
                     }
                 }
@@ -87,12 +104,13 @@ public class CustomerAgentImpl implements CustomerAgent {
                 responseCustomer = null;
             }
 
-        }  else {
+        } else {
             responseCustomer = null;
         }
         response.setCustomer(responseCustomer);
         return response;
     }
+
 }
 
 

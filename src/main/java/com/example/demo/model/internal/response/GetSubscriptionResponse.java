@@ -10,6 +10,7 @@ public class GetSubscriptionResponse {
         private String serialNumber;
         private Long subscriptionId;
         private String planName;
+        private Long phoneNumber;
 
         public String getFirstName() {
             return firstName;
@@ -53,6 +54,15 @@ public class GetSubscriptionResponse {
 
         public Subscription setPlanName(String planName) {
             this.planName = planName;
+            return this;
+        }
+
+        public Long getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        public Subscription setPhoneNumber(Long phoneNumber) {
+            this.phoneNumber = phoneNumber;
             return this;
         }
     }

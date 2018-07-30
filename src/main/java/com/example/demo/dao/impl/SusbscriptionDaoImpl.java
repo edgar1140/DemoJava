@@ -24,7 +24,7 @@ public class SusbscriptionDaoImpl implements SubscriptionDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public boolean createSubscription(Long accountId, Long subscriptionId, Long createUserId, String firstName, String lastName, String serialNumber, Boolean active, Long phoneNumber) {
+    public boolean createSubscription(Long accountId, Long subscriptionId, Long createUserId, String firstName, String lastName, String serialNumber, Boolean active, Long phoneNumber, String planName) {
         final String sql = "" +
             " INSERT INTO subscription ( " +
             "   account_id, " +
@@ -32,16 +32,20 @@ public class SusbscriptionDaoImpl implements SubscriptionDao {
             "   create_user_id, " +
             "   first_name, " +
             "   last_name, " +
+            "   serial_number, " +
             "   active, " +
-            "   phone_number " +
+            "   phone_number, " +
+            "   plan_name " +
             " ) VALUES ( " +
             "   :accountId, " +
             "   :subscriptionId, " +
             "   :createUserId, " +
             "   :firstName, " +
             "   :lastName, " +
+            "   :serialNumber," +
             "   :active, " +
-            "   :phoneNumber " +
+            "   :phoneNumber, " +
+            "   :planName " +
             " )";
 
         final MapSqlParameterSource parameterSource = new MapSqlParameterSource()
@@ -50,8 +54,10 @@ public class SusbscriptionDaoImpl implements SubscriptionDao {
             .addValue("createUserId", createUserId)
             .addValue("firstName", firstName)
             .addValue("lastName", lastName)
+            .addValue("serialNumber", serialNumber)
             .addValue("active", active)
-            .addValue("phoneNumber", phoneNumber);
+            .addValue("phoneNumber", phoneNumber)
+            .addValue("planName", planName);
         final int rowsUpdate = namedParameterJdbcTemplate.update(sql, parameterSource);
         return rowsUpdate == 1;
     }
@@ -99,7 +105,10 @@ public class SusbscriptionDaoImpl implements SubscriptionDao {
                         .setCreateUserId(rs.getLong("create_user_id"))
                         .setFirstName(rs.getString("first_name"))
                         .setLastName(rs.getString("last_name"))
+                        .setPhoneNumber(rs.getLong("phone_number"))
+                        .setSerialNumber(rs.getString("serial_number"))
                         .setActive(rs.getBoolean("active"))
+                        .setPlanName(rs.getString("plan_name"))
                         .setCreateDate(rs.getTimestamp("create_date"))
                         .setExpireUserId(rs.getLong("expire_user_id"))
                         .setExpirationDate(rs.getTimestamp("expire_date"));

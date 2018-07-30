@@ -2,6 +2,7 @@ package com.example.demo.model.internal;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author eguzman (2018.07.12 9:01 PM)
@@ -17,6 +18,7 @@ public class Account {
     private Date createDate;
     private Long expireUserId;
     private Date expirationDate;
+    private List<Subscription> subscriptionList;
 
     public Long getId() {
         return id;
@@ -105,6 +107,15 @@ public class Account {
 
     public Account setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
+        return this;
+    }
+
+    public List<Subscription> getSubscriptionList() {
+        return subscriptionList;
+    }
+
+    public Account setSubscriptionList(List<Subscription> subscriptionList) {
+        this.subscriptionList = subscriptionList;
         return this;
     }
 }

@@ -45,7 +45,7 @@ CREATE TABLE account (
 );
 
 CREATE SEQUENCE subscription_id_seq
-  START WITH 1;
+  START WITH 5;
 
 CREATE TABLE subscription (
   subscription_id INTEGER(50) NOT NULL PRIMARY KEY,

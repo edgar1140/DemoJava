@@ -84,3 +84,69 @@ VALUES (
 
 );
 
+
+INSERT INTO subscription (
+  subscription_id,
+  account_id,
+  first_name,
+  last_name,
+  create_user_id
+
+)
+VALUES (
+  1,
+  1,
+  'Danny',
+  'Trejo',
+  1
+
+);
+
+INSERT INTO subscription (
+  subscription_id,
+  account_id,
+  first_name,
+  last_name,
+  create_user_id
+
+)
+VALUES (
+  2,
+  2,
+  'George',
+  'Lopez',
+  1
+
+);
+
+INSERT INTO subscription (
+  subscription_id,
+  account_id,
+  first_name,
+  last_name,
+  create_user_id
+)
+VALUES (
+  3,
+  3,
+  'Kevin',
+  'Hart',
+  1
+
+);
+
+INSERT INTO subscription (
+  subscription_id,
+  account_id,
+  first_name,
+  last_name,
+  create_user_id
+)
+VALUES (
+  4,
+  3,
+  'Bill',
+  'Hartly',
+  1
+
+);

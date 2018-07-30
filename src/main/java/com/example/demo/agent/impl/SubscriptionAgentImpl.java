@@ -33,11 +33,12 @@ public class SubscriptionAgentImpl implements SubscriptionAgent {
         final String serialNumber = request.getSerialNumber();
         final Boolean active = request.getActive();
         final Long phoneNumber = request.getPhoneNumber();
+        final String planName = request.getPlanName();
 
         if (StringUtils.isNotEmpty(firstName)
             && StringUtils.isNotEmpty(lastName)) {
             final Long subscriptionId = subscriptionDao.getSubscriptionIdNextValue();
-            final boolean success = subscriptionDao.createSubscription(accountId, subscriptionId, create_user_id, firstName, lastName, serialNumber, active, phoneNumber);
+            final boolean success = subscriptionDao.createSubscription(accountId, subscriptionId, create_user_id, firstName, lastName, serialNumber, active, phoneNumber, planName);
             final Subscription subscription = success ? subscriptionDao.getSubscriptionById(subscriptionId) : null;
             final CreateSubscriptionResponse.Subscription responseSubscription;
 
@@ -50,7 +51,8 @@ public class SubscriptionAgentImpl implements SubscriptionAgent {
                     .setLastName(subscription.getLastName())
                     .setSerialNumber(subscription.getSerialNumber())
                     .setActive(subscription.getActive())
-                    .setPhoneNumber(subscription.getPhoneNumber());
+                    .setPhoneNumber(subscription.getPhoneNumber())
+                    .setPlanName(subscription.getPlanName());
             } else {
                 responseSubscription = null;
             }
@@ -74,7 +76,10 @@ public class SubscriptionAgentImpl implements SubscriptionAgent {
                 responseSubscription = new GetSubscriptionResponse.Subscription()
                     .setFirstName(subscription.getFirstName())
                     .setLastName(subscription.getLastName())
-                    .setSubscriptionId(subscription.getId());
+                    .setSubscriptionId(subscription.getId())
+                    .setSerialNumber(subscription.getSerialNumber())
+                    .setPlanName(subscription.getPlanName())
+                    .setPhoneNumber(subscription.getPhoneNumber());
 
             } else {
                 responseSubscription = null;

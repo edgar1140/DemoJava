@@ -7,7 +7,7 @@ import com.example.demo.model.internal.Subscription;
  */
 public interface SubscriptionDao {
     boolean createSubscription(Long accountId, Long subscriptionId, Long createUserId, String firstName, String lastName,
-                               String serialNumber, Boolean active, Long phoneNumber);
+                               String serialNumber, Boolean active, Long phoneNumber, String planName);
 
     Long getSubscriptionIdNextValue();
 
