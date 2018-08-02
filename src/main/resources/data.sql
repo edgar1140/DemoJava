@@ -28,6 +28,17 @@ VALUES (
   'Manuel',
   'Gutierrez',
   1
+);INSERT INTO customer (
+  customer_id,
+  first_name,
+  last_name,
+  create_user_id
+)
+VALUES (
+  2,
+  'Manny',
+  'Paquiado',
+  1
 );
 
 INSERT INTO account (
@@ -88,6 +99,7 @@ VALUES (
 INSERT INTO subscription (
   subscription_id,
   account_id,
+  phone_number,
   first_name,
   last_name,
   create_user_id
@@ -96,6 +108,7 @@ INSERT INTO subscription (
 VALUES (
   1,
   1,
+  '6623155569',
   'Danny',
   'Trejo',
   1
@@ -105,6 +118,7 @@ VALUES (
 INSERT INTO subscription (
   subscription_id,
   account_id,
+  phone_number,
   first_name,
   last_name,
   create_user_id
@@ -113,6 +127,7 @@ INSERT INTO subscription (
 VALUES (
   2,
   2,
+  '6623152123',
   'George',
   'Lopez',
   1
@@ -122,6 +137,7 @@ VALUES (
 INSERT INTO subscription (
   subscription_id,
   account_id,
+  phone_number,
   first_name,
   last_name,
   create_user_id
@@ -129,6 +145,7 @@ INSERT INTO subscription (
 VALUES (
   3,
   3,
+  '6623154774',
   'Kevin',
   'Hart',
   1
@@ -138,6 +155,7 @@ VALUES (
 INSERT INTO subscription (
   subscription_id,
   account_id,
+  phone_number,
   first_name,
   last_name,
   create_user_id
@@ -145,6 +163,7 @@ INSERT INTO subscription (
 VALUES (
   4,
   3,
+  '6623154879',
   'Bill',
   'Hartly',
   1

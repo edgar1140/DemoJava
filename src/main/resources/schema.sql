@@ -15,7 +15,7 @@ CREATE TABLE user (
 );
 
 CREATE SEQUENCE customer_id_seq
-  START WITH 2;
+  START WITH 3;
 
 CREATE TABLE customer (
   customer_id    INTEGER(50) NOT NULL PRIMARY KEY,
@@ -50,7 +50,7 @@ CREATE SEQUENCE subscription_id_seq
 CREATE TABLE subscription (
   subscription_id INTEGER(50) NOT NULL PRIMARY KEY,
   account_id      INTEGER(50) NOT NULL,
-  phone_number    INTEGER(20),
+  phone_number    VARCHAR(20),
   serial_number   VARCHAR(20),
   plan_name        VARCHAR(20),
   first_name      VARCHAR(50) NOT NULL,

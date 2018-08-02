@@ -11,8 +11,10 @@ import com.example.demo.agent.CustomerAgent;
 import com.example.demo.model.internal.request.CreateCustomerRequest;
 import com.example.demo.model.internal.request.CreateUserRequest;
 import com.example.demo.model.internal.request.GetCustomerRequest;
+import com.example.demo.model.internal.request.SearchCustomerRequest;
 import com.example.demo.model.internal.response.CreateCustomerResponse;
 import com.example.demo.model.internal.response.GetCustomerResponse;
+import com.example.demo.model.internal.response.SearchCustomerResponse;
 
 /**
  * @author eguzman (2018.07.09 3:11 PM)
@@ -29,6 +31,10 @@ public class CustomerController {
     @RequestMapping(value = "get-by-id",method = RequestMethod.POST)
     public GetCustomerResponse getCustomerById (@RequestBody GetCustomerRequest request) {
         return customerAgent.getCustomer(request);
+    }
+    @RequestMapping (value = "Search-customer", method = RequestMethod.POST)
+    public SearchCustomerResponse searchCustomers(@RequestBody SearchCustomerRequest request) {
+        return customerAgent.searchCustomer(request);
     }
 
 }

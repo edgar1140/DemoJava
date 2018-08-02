@@ -1,6 +1,9 @@
 package com.example.demo.dao;
 
+import java.util.List;
+
 import com.example.demo.model.internal.Customer;
+import com.example.demo.model.internal.SearchCustomer;
 
 /**
  * @author eguzman (2018.07.09 11:11 AM)
@@ -11,4 +14,10 @@ public interface CustomerDao {
     Long  getCustomerIdNextValue();
 
     Customer getCustomerById(Long id);
+
+//    SearchCustomer getCustomerByFirstAndLastName(Long id, String firstName, String lastName, String phoneNumber);
+
+//    List<SearchCustomer> getCustomerByFirstAndLastName(String firstName, String lastName);
+//
+//    List<SearchCustomer> getCustomerByPhoneNumber(String phoneNumber);
 }

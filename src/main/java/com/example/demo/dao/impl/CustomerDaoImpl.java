@@ -129,7 +129,7 @@ public class CustomerDaoImpl implements CustomerDao {
                             .setCreateDate(rs.getTimestamp("acct_create_date"))
                             .setExpireUserId(rs.getLong("acct_expire_user_id"))
                             .setExpirationDate(rs.getTimestamp("acct_expire_date"));
-                        final List<Account> accountList = customer.getAccountList() != null ? customer.getAccountList() :new ArrayList<>();
+                        final List<Account> accountList = customer.getAccountList() != null ? customer.getAccountList() : new ArrayList<>();
                         customer.setAccountList(accountList);
                         accountList.add(account);
 
@@ -145,7 +145,7 @@ public class CustomerDaoImpl implements CustomerDao {
                             .setCreateDate(rs.getTimestamp("subs_create_date"))
                             .setExpireUserId(rs.getLong("subs_expire_user_id"))
                             .setExpirationDate(rs.getTimestamp("subs_expire_date"));
-                        final List<Subscription> subscriptionList = account.getSubscriptionList() != null ? account.getSubscriptionList() :new ArrayList<>();
+                        final List<Subscription> subscriptionList = account.getSubscriptionList() != null ? account.getSubscriptionList() : new ArrayList<>();
                         account.setSubscriptionList(subscriptionList);
                         subscriptionList.add(subscription);
 
@@ -159,3 +159,49 @@ public class CustomerDaoImpl implements CustomerDao {
         });
     }
 }
+
+//    @Override
+//    public List<SearchCustomer> getCustomerByFirstAndLastName(String firstName, String lastName) {
+//        final String sql = "" +
+//            " SELECT cust.customer_id, cust.first_name, cust.last_name " +
+//            " FROM customer cust " +
+//            " WHERE UPPER(cust.first_name) LIKE UPPER('%'||:firstName ||'%')" +
+//            " And UPPER(cust.last_name)LIKE UPPER('%'||:lastName||'%') ";
+//        final MapSqlParameterSource parameterSource = new MapSqlParameterSource()
+//            .addValue("firstName", firstName)
+//            .addValue("lastName", lastName);
+//
+//        return namedParameterJdbcTemplate.query(sql, parameterSource, new RowMapper<SearchCustomer>() {
+//            @Override
+//            public SearchCustomer mapRow(ResultSet rs, int rowNum) throws SQLException {
+//                return new SearchCustomer()
+//                    .setId(rs.getLong("customer_id"))
+//                    .setFirstName(rs.getString("first_name"))
+//                    .setLastName(rs.getString("last_name"))
+//                    ;
+//            }
+//        });
+//    }
+//
+//    @Override
+//    public List<SearchCustomer> getCustomerByPhoneNumber(String phoneNumber) {
+//        final String sql = "" +
+//            "SELECT cust.customer_id, cust.first_name, cust.last_name, cust.phone_number" +
+//            "from customer cust " +
+//            "INNER JOIN account acct ON cust.customer_id = acct.customer_id " +
+//            "INNER JOIN subscription sub ON acct.account_id = sub.account_id " +
+//            "WHERE sub.phone_number = :phoneNumber";
+//        final MapSqlParameterSource parameterSource = new MapSqlParameterSource()
+//            .addValue("phoneNumber", phoneNumber);
+//        return namedParameterJdbcTemplate.query(sql, parameterSource, new RowMapper<SearchCustomer>() {
+//            @Override
+//            public SearchCustomer mapRow(ResultSet rs, int rowNum) throws SQLException {
+//                return new SearchCustomer()
+//                    .setId(rs.getLong("customer_id"))
+//                    .setFirstName(rs.getString("first_name"))
+//                    .setLastName(rs.getString("last_name"))
+//                    .setPhoneNumber(rs.getString("phone_number"))
+//                    ;
+//            }
+//        });
+//    }
