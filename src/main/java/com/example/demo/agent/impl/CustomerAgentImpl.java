@@ -115,41 +115,7 @@ public class CustomerAgentImpl implements CustomerAgent {
         return response;
     }
 
-    @Override
-    public SearchCustomerResponse searchCustomer(SearchCustomerRequest request) {
-        final SearchCustomerResponse response = new SearchCustomerResponse();
-        final SearchCustomerRequest.SearchType searchType = request.getSearchType();
-        final String firstName = request.getFirstName();
-        final String lastName = request.getLastName();
-        final String phoneNumber = request.getPhoneNumber();
 
-        final List<SearchCustomer> SearchCustomerList;
-        if (SearchCustomerRequest.SearchType.FIRST_AND_LAST_NAMES.equals(searchType)) {
-            SearchCustomerList = searchcustomerDao.getCustomerByFirstAndLastName(firstName, lastName, phoneNumber);
-
-        } else if (SearchCustomerRequest.SearchType.PHONE_NUMBER.equals(searchType)) {
-            SearchCustomerList = customerDao.getCustomerByPhoneNumber(phoneNumber);
-
-        } else {
-            SearchCustomerList = null;
-        }
-
-        final List<SearchCustomerResponse.SearchCustomer> customers;
-        if (SearchCustomerList != null) {
-            searchCustomer() = new ArrayList<>();
-            for (SearchCustomerList  : SearchCustomerList) {
-                SearchCustomerResponse.Customer responsecustomer = new SearchCustomerResponse.SearchCustomer()
-                    .setId(customer.getId())
-                    .setFirstName(customer.getFirstName())
-                    .setLastName(customer.getLastName());
-                customers.add(responsecustomer);
-            }
-        } else {
-            customers = null;
-        }
-        response.setCustomers(customers);
-        return response;
-    }
 
 }
 

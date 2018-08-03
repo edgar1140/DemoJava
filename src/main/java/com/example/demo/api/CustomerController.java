@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.agent.CustomerAgent;
+import com.example.demo.agent.SearchCustomerAgent;
+import com.example.demo.model.internal.SearchCustomer;
 import com.example.demo.model.internal.request.CreateCustomerRequest;
 import com.example.demo.model.internal.request.CreateUserRequest;
 import com.example.demo.model.internal.request.GetCustomerRequest;
@@ -24,6 +26,10 @@ import com.example.demo.model.internal.response.SearchCustomerResponse;
 public class CustomerController {
     @Resource
     private CustomerAgent customerAgent;
+
+    @Resource
+    private SearchCustomerAgent searchCustomerAgent;
+
     @RequestMapping (value = "/create", method = RequestMethod.POST)
     public CreateCustomerResponse create (@RequestBody CreateCustomerRequest request){
         return customerAgent.createCustomer(request);
@@ -32,9 +38,9 @@ public class CustomerController {
     public GetCustomerResponse getCustomerById (@RequestBody GetCustomerRequest request) {
         return customerAgent.getCustomer(request);
     }
-    @RequestMapping (value = "Search-customer", method = RequestMethod.POST)
+    @RequestMapping (value = "search-customer", method = RequestMethod.POST)
     public SearchCustomerResponse searchCustomers(@RequestBody SearchCustomerRequest request) {
-        return customerAgent.searchCustomer(request);
+        return searchCustomerAgent.searchCustomer(request);
     }
 
 }

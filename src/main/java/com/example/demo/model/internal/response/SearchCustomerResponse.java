@@ -10,6 +10,7 @@ public class SearchCustomerResponse {
         private Long id;
         private String firstName;
         private String lastName;
+        private String phoneName;
 
         public Long getId() {
             return id;
@@ -35,6 +36,15 @@ public class SearchCustomerResponse {
 
         public Customer setLastName(String lastName) {
             this.lastName = lastName;
+            return this;
+        }
+
+        public String getPhoneName() {
+            return phoneName;
+        }
+
+        public Customer setPhoneName(String phoneName) {
+            this.phoneName = phoneName;
             return this;
         }
     }

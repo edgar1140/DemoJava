@@ -15,9 +15,4 @@ public interface CustomerDao {
 
     Customer getCustomerById(Long id);
 
-//    SearchCustomer getCustomerByFirstAndLastName(Long id, String firstName, String lastName, String phoneNumber);
-
-//    List<SearchCustomer> getCustomerByFirstAndLastName(String firstName, String lastName);
-//
-//    List<SearchCustomer> getCustomerByPhoneNumber(String phoneNumber);
 }

@@ -3,6 +3,8 @@ package com.example.demo.agent.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.agent.SearchCustomerAgent;
@@ -16,6 +18,9 @@ import com.example.demo.model.internal.response.SearchCustomerResponse;
  */
 @Service
 public class SearchCustomerAgentImpl implements SearchCustomerAgent {
+    @Resource
+    private SearchCustomerDao searchCustomerDao;
+
     @Override
     public SearchCustomerResponse searchCustomer(SearchCustomerRequest request) {
         final SearchCustomerResponse response = new SearchCustomerResponse();
@@ -24,32 +29,33 @@ public class SearchCustomerAgentImpl implements SearchCustomerAgent {
         final String lastName = request.getLastName();
         final String phoneNumber = request.getPhoneNumber();
 
-        final List<SearchCustomer> SearchCustomerList;
+        final List<SearchCustomer> searchCustomerList;
         if (SearchCustomerRequest.SearchType.FIRST_AND_LAST_NAMES.equals(searchType)) {
-            SearchCustomerList = SearchCustomerDao.getCustomerByFirstAndLastName(firstName, lastName, phoneNumber);
+            searchCustomerList = searchCustomerDao.getCustomerByFirstAndLastName(firstName, lastName);
 
         } else if (SearchCustomerRequest.SearchType.PHONE_NUMBER.equals(searchType)) {
-            SearchCustomerList = SearchCustomerDao.getCustomerByPhoneNumber(phoneNumber);
+            searchCustomerList = searchCustomerDao.getCustomerByPhoneNumber(phoneNumber);
 
         } else {
-            SearchCustomerList = null;
+            searchCustomerList = null;
         }
 
-        final List<SearchCustomerResponse.SearchCustomer> searchCustomer;
-        if (SearchCustomerList != null) {
-            searchCustomer() = new ArrayList<>();
-            for (SearchCustomerList:
-                 SearchCustomerList) {
-                SearchCustomerResponse.SearchCustomer responsecustomer = new SearchCustomerResponse.SearchCustomer()
-                    .setId(searchCustomer.getId())
-                    .setFirstName(searchCustomer.getFirstName())
-                    .setLastName(searchCustomer.getLastName());
-                searchCustomer.add(responsecustomer);
+
+        final List<SearchCustomerResponse.Customer> searchCustomers;
+        if (searchCustomerList != null) {
+            searchCustomers = new ArrayList<>();
+            for (SearchCustomer customer : searchCustomerList) {
+                SearchCustomerResponse.Customer responsecustomer = new SearchCustomerResponse.Customer()
+                    .setId(customer.getId())
+                    .setFirstName(customer.getFirstName())
+                    .setLastName(customer.getLastName())
+                    .setPhoneName(customer.getPhoneNumber());
+                searchCustomers.add(responsecustomer);
             }
         } else {
-            searchCustomer = null;
+            searchCustomers = null;
         }
-        response.setCustomers(searchCustomer);
+        response.setCustomers(searchCustomers);
         return response;
     }
 }

@@ -23,11 +23,6 @@ public class SearchCustomerDaoImpl implements SearchCustomerDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public SearchCustomer createSearchCustomer(Long id, String firstName, String lastName, String phoneNumber) {
-        return null;
-    }
-
-    @Override
     public List<SearchCustomer> getCustomerByFirstAndLastName(String firstName, String lastName) {
         final String sql = "" +
             " SELECT cust.customer_id, cust.first_name, cust.last_name " +
@@ -53,11 +48,11 @@ public class SearchCustomerDaoImpl implements SearchCustomerDao {
     @Override
     public List<SearchCustomer> getCustomerByPhoneNumber(String phoneNumber) {
         final String sql = "" +
-            "SELECT cust.customer_id, cust.first_name, cust.last_name, cust.phone_number" +
-            "from customer cust " +
-            "INNER JOIN account acct ON cust.customer_id = acct.customer_id " +
-            "INNER JOIN subscription sub ON acct.account_id = sub.account_id " +
-            "WHERE sub.phone_number = :phoneNumber";
+            "SELECT cust.customer_id, cust.first_name, cust.last_name, cust.phone_number " +
+            " from customer cust " +
+            " INNER JOIN account acct ON cust.customer_id = acct.customer_id " +
+            " INNER JOIN subscription sub ON acct.account_id = sub.account_id " +
+            " WHERE sub.phone_number = :phoneNumber ";
         final MapSqlParameterSource parameterSource = new MapSqlParameterSource()
             .addValue("phoneNumber", phoneNumber);
         return namedParameterJdbcTemplate.query(sql, parameterSource, new RowMapper<SearchCustomer>() {
