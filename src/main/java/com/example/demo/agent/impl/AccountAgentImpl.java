@@ -22,6 +22,7 @@ import com.example.demo.utility.StringUtils;
  */
 @Service
 public class AccountAgentImpl implements AccountAgent {
+
     @Resource
     private AccountDao accountDao;
 
