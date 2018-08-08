@@ -1,5 +1,4 @@
-CREATE SEQUENCE user_id_seq
-  START WITH 2;
+CREATE SEQUENCE user_id_seq;
 
 CREATE TABLE user (
   user_id        INTEGER(50) NOT NULL PRIMARY KEY,
