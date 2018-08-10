@@ -9,9 +9,9 @@ INSERT INTO user (
 )
 VALUES (
   user_id_seq.NEXTVAL,
-  'USER_01_FIRST',
-  'USER_01_MIDDLE',
-  'USER_01_LAST',
+  'Hector',
+  'Mauricio',
+  'De La Torre',
   'PLACE HOLDER',
   383,
   1
@@ -27,10 +27,48 @@ INSERT INTO user (
 )
 VALUES (
  user_id_seq.NEXTVAL,
- 'matthew',
+ 'Matthew',
  'David',
- 'mcconaughey',
+ 'Mcconaughey',
  'The DUDE',
+ 383,
+ 1
+);
+
+INSERT INTO user (
+ user_id,
+ first_name,
+ middle_name,
+ last_name,
+ job_title,
+ location_id,
+ create_user_id
+)
+VALUES (
+ user_id_seq.NEXTVAL,
+ 'Maria',
+ 'Concepcion',
+ 'Pena',
+ 'La Morra',
+ 383,
+ 1
+);
+
+INSERT INTO user (
+ user_id,
+ first_name,
+ middle_name,
+ last_name,
+ job_title,
+ location_id,
+ create_user_id
+)
+VALUES (
+ user_id_seq.NEXTVAL,
+ 'Timmy',
+ 'Fairy',
+ 'Turner',
+ 'The kid',
  383,
  1
 );
